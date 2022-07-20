@@ -1,0 +1,41 @@
+python scripts/demo_inference.py --cfg configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml --checkpoint ${trained_model} --indir pretrained_models/fast_res50_256x192.pth --outdir ${output_directory}
+
+python scripts/demo_inference.py --cfg configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml --checkpoint pretrained_models/halpe136_fast50_regression_256x192.pth --save_video --outdir examples/res --vis --webcam 0
+
+./scripts/inference.sh configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml pretrained_models/fast_res50_256x192.pth pose_detection.avi  examples/res, --save_video --sp --detector tracker
+
+python scripts/demo_inference.py --cfg configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml --checkpoint pretrained_models/halpe136_fast50_regression_256x192.pth --indir examples/demo/ --save_img
+
+./scripts/inference.sh configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml pretrained_models/halpe136_fast50_regression_256x192.pth gaze_detection.avi  examples/res, --save_video --sp --detector tracker
+
+
+Si première éxecution d'un fichier .sh, exécuter cette commande d'abord :
+
+chmod +x /path/to/yourscript.sh
+
+gaze_detection :
+./scripts/gaze_detection.sh configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml pretrained_models/halpe136_fast50_regression_256x192.pth gaze_detection.avi  examples/gaze_detection --save_video --sp --detector tracker
+
+OR
+
+python scripts/gaze_detection.py --cfg configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml --checkpoint pretrained_models/halpe136_fast50_regression_256x192.pth --save_video --outdir examples/gaze_detection --vis --webcam 0
+
+face_detection :
+./scripts/face_detection.sh configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml pretrained_models/fast_res50_256x192.pth face_detection.avi  examples/face_detection --save_video --sp --detector tracker
+
+OR
+
+python scripts/face_detection.py --cfg configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml --checkpoint pretrained_models/fast_res50_256x192.pth --webcam 0  --outdir examples/face_detection --save_video --vis
+
+pose_detection : 
+./scripts/pose_detection.sh configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml pretrained_models/fast_res50_256x192.pth alphapose/test/pose_detection/pose_video.avi  examples/pose_detection --save_video --sp --detector tracker
+
+OR
+
+python scripts/pose_detection.py --cfg configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml --checkpoint pretrained_models/fast_res50_256x192.pth --webcam 0  --outdir examples/pose_detection --save_video --vis
+hand_detection : 
+./scripts/hand_detection.sh configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml pretrained_models/halpe136_fast50_regression_256x192.pth alphapose/test/capture_circle_1.avi  examples/hand_detection --save_video --sp --detector tracker
+
+OR
+
+python scripts/hand_detection.py --cfg configs/halpe_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml --checkpoint pretrained_models/halpe136_fast50_regression_256x192.pth --video alphapose/test/capture_circle_1.avi --outdir examples/hand_detection --save_video --sp --detector tracker
